@@ -22,9 +22,14 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
-modId = "customportalapi"
-type = "required"
-versionRange = "[0,)"
-ordering = "AFTER"
-side = "BOTH"
+# Custom Portal API is not used by the Void portal (it supports one frame block per portal and
+# can't express anchors or stored links). Re-enable if it's adopted for data-driven Nether portals.
+#[[dependencies.${mod_id}]]
+#modId = "customportalapi"
+#type = "required"
+#versionRange = "[0,)"
+#ordering = "AFTER"
+#side = "BOTH"
+
+[[mixins]]
+config = "${mod_id}.mixins.json"

@@ -66,8 +66,9 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    // Custom Portal API Reforged (NeoForge 1.21.1). Set cpapi_version in gradle.properties.
-    implementation "net.kyrptonaught.customportalapi:cpapireforged-neo-${minecraft_version}:${cpapi_version}"
+    // Custom Portal API Reforged: not used by the Void portal. Uncomment (and set cpapi_version) if it's
+    // adopted for data-driven Nether portals.
+    // implementation "net.kyrptonaught.customportalapi:cpapireforged-neo-${minecraft_version}:${cpapi_version}"
 }
 
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
