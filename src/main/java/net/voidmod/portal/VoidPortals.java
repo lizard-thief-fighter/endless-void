@@ -20,16 +20,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-/** Lighting and travel rules for Void portals. */
+/** Travel rules for Void portals. */
 public final class VoidPortals {
-
-    /** Called when fire appears. Returns true if the fire lit a Void portal (and so was replaced). */
-    public static boolean tryLight(Level level, BlockPos firePos) {
-        if (level.isClientSide() || !isPortalDimension(level.dimension())) return false;
-        Optional<VoidPortalShape> shape = VoidPortalShape.find(level, firePos, Direction.Axis.X);
-        shape.ifPresent(s -> s.light(level));
-        return shape.isPresent();
-    }
 
     /**
      * Overworld -> Void: follow the stored link, or generate a return portal at the scaled position and link it.
@@ -46,16 +38,17 @@ public final class VoidPortals {
 
         BlockState state = from.getBlockState(portalPos);
         Direction.Axis axis = state.hasProperty(VoidPortalBlock.AXIS) ? state.getValue(VoidPortalBlock.AXIS) : Direction.Axis.X;
-        Optional<VoidPortalShape> source = VoidPortalShape.findOnAxis(from, portalPos, axis);
+        Optional<PortalFrame> source = PortalFrame.findOnAxis(from, portalPos, axis, PortalSpec.voidPortal(from));
         if (source.isEmpty()) return null;
-        VoidPortalShape src = source.get();
+        PortalFrame src = source.get();
 
         VoidPortalLinks links = VoidPortalLinks.get(from.getServer());
         GlobalPos linked = links.find(from.dimension(), src.anchors());
         if (linked != null && linked.dimension() == toKey) {
-            Optional<VoidPortalShape> target = VoidPortalShape.findAroundAnchor(to, linked.pos(), src.axis());
+            PortalSpec targetSpec = PortalSpec.voidPortal(to);
+            Optional<PortalFrame> target = PortalFrame.findAroundAnchor(to, linked.pos(), src.axis(), targetSpec);
             if (target.isPresent()) {
-                if (!target.get().isLit(to)) target.get().light(to);
+                if (!target.get().isLit(to, targetSpec)) target.get().light(to, targetSpec);
                 return transition(to, entity, target.get().arrivalPoint());
             }
             VoidMod.LOGGER.warn("Linked portal frame at {} in {} is no longer valid", linked.pos(), toKey.location());
@@ -64,7 +57,7 @@ public final class VoidPortals {
 
         BlockPos scaled = scaledPosition(from, to, entity);
         if (toKey == VoidDimensions.THE_VOID) {
-            VoidPortalShape created = VoidReturnPortal.place(to, scaled, src.axis());
+            PortalFrame created = VoidReturnPortal.place(to, scaled, src.axis());
             if (created == null) return null;
             links.link(from.dimension(), src, toKey, created);
             return transition(to, entity, created.arrivalPoint());

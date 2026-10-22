@@ -27,7 +27,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.voidmod.VoidTags;
 import org.jetbrains.annotations.Nullable;
 
 /** Nether-portal-style block that links the Overworld and the Void. */
@@ -77,7 +76,7 @@ public class VoidPortalBlock extends BaseEntityBlock implements Portal {
                                      LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         Direction.Axis dirAxis = direction.getAxis();
         boolean inPlane = dirAxis == state.getValue(AXIS) || dirAxis == Direction.Axis.Y;
-        if (inPlane && !neighborState.is(this) && !neighborState.is(VoidTags.VOID_PORTAL_FRAME)) {
+        if (inPlane && !neighborState.is(this) && !PortalSpec.voidPortal(level).isFrame(neighborState, level, neighborPos)) {
             return Blocks.AIR.defaultBlockState();
         }
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);

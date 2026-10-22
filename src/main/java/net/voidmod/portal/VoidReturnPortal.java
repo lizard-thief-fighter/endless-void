@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.voidmod.VoidMod;
-import net.voidmod.VoidTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -27,7 +26,7 @@ public final class VoidReturnPortal {
     /** Height used when no ground is found within the search radius (the portal floats on its platform). */
     private static final int FLOATING_Y = 64;
 
-    public static @Nullable VoidPortalShape place(ServerLevel level, BlockPos target, Direction.Axis axis) {
+    public static @Nullable PortalFrame place(ServerLevel level, BlockPos target, Direction.Axis axis) {
         Optional<StructureTemplate> found = level.getStructureManager().get(TEMPLATE);
         if (found.isEmpty()) {
             VoidMod.LOGGER.error("Missing structure template {}", TEMPLATE);
@@ -44,13 +43,14 @@ public final class VoidReturnPortal {
         template.placeInWorld(level, origin, origin, settings, level.getRandom(), Block.UPDATE_CLIENTS);
 
         BoundingBox placed = template.getBoundingBox(settings, origin);
+        PortalSpec spec = PortalSpec.voidPortal(level);
         for (BlockPos pos : BlockPos.betweenClosed(placed.minX(), placed.minY(), placed.minZ(),
                 placed.maxX(), placed.maxY(), placed.maxZ())) {
-            if (!level.getBlockState(pos).is(VoidTags.VOID_PORTAL_ANCHOR)) continue;
-            Optional<VoidPortalShape> shape = VoidPortalShape.findAroundAnchor(level, pos.immutable(), axis);
-            if (shape.isPresent()) {
-                shape.get().light(level);
-                return shape.get();
+            if (!spec.isAnchor(level.getBlockState(pos))) continue;
+            Optional<PortalFrame> frame = PortalFrame.findAroundAnchor(level, pos.immutable(), axis, spec);
+            if (frame.isPresent()) {
+                frame.get().light(level, spec);
+                return frame.get();
             }
         }
         VoidMod.LOGGER.error("Structure template {} has no valid portal frame with an anchor block", TEMPLATE);

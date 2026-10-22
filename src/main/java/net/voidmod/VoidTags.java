@@ -14,6 +14,8 @@ public final class VoidTags {
     public static final TagKey<Block> VOID_PORTAL_ANCHOR = block("void_portal_anchor");
     /** Blocks inside a frame that lighting may replace, e.g. sculk veins in Ancient Cities. */
     public static final TagKey<Block> VOID_PORTAL_REPLACEABLE = block("void_portal_replaceable");
+    /** Blocks that can form a Nether portal frame (obsidian by default). */
+    public static final TagKey<Block> NETHER_PORTAL_FRAME = block("nether_portal_frame");
 
     private static TagKey<Block> block(String path) {
         return TagKey.create(Registries.BLOCK, VoidMod.id(path));

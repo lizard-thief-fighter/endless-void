@@ -50,7 +50,7 @@ public class VoidPortalLinks extends SavedData {
     }
 
     /** Links both portals to each other. */
-    public void link(ResourceKey<Level> fromDim, VoidPortalShape from, ResourceKey<Level> toDim, VoidPortalShape to) {
+    public void link(ResourceKey<Level> fromDim, PortalFrame from, ResourceKey<Level> toDim, PortalFrame to) {
         GlobalPos fromAnchor = GlobalPos.of(fromDim, from.anchors().getFirst());
         GlobalPos toAnchor = GlobalPos.of(toDim, to.anchors().getFirst());
         for (BlockPos anchor : from.anchors()) links.put(GlobalPos.of(fromDim, anchor), toAnchor);
