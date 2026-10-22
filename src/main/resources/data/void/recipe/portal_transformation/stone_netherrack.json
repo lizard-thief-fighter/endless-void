@@ -1,0 +1,10 @@
+{
+  "type": "void:portal_transformation",
+  "ingredient": {
+    "item": "minecraft:stone"
+  },
+  "result": "minecraft:netherrack",
+  "from": "minecraft:overworld",
+  "to": "minecraft:the_nether",
+  "reversible": true
+}

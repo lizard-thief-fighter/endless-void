@@ -7,6 +7,7 @@ import net.neoforged.fml.common.Mod;
 import net.voidmod.portal.PortalTypes;
 import net.voidmod.registry.VoidBlockEntities;
 import net.voidmod.registry.VoidBlocks;
+import net.voidmod.registry.VoidRecipes;
 import org.slf4j.Logger;
 
 @Mod(VoidMod.MOD_ID)
@@ -17,6 +18,8 @@ public class VoidMod {
     public VoidMod(IEventBus modEventBus) {
         VoidBlocks.BLOCKS.register(modEventBus);
         VoidBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
+        VoidRecipes.RECIPE_TYPES.register(modEventBus);
+        VoidRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         modEventBus.addListener(PortalTypes::register);
     }
 
