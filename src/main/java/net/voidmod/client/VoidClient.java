@@ -7,7 +7,8 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.voidmod.VoidMod;
 import net.voidmod.registry.VoidBlockEntities;
 
-@EventBusSubscriber(modid = VoidMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+// NeoForge routes mod-bus events (like RegisterRenderers) to the mod bus automatically.
+@EventBusSubscriber(modid = VoidMod.MOD_ID, value = Dist.CLIENT)
 public final class VoidClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
