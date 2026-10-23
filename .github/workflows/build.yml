@@ -22,15 +22,12 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      # The repo has no Gradle wrapper yet, so a fixed Gradle version is installed instead.
-      # Once gradlew is committed, drop gradle-version and run ./gradlew build.
+      # Caches Gradle and checks gradle-wrapper.jar against official Gradle checksums.
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v5
-        with:
-          gradle-version: '8.10.2'
 
       - name: Build
-        run: gradle build --stacktrace
+        run: ./gradlew build --stacktrace
 
       - name: Upload mod jar
         uses: actions/upload-artifact@v6
