@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:max",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": 2.4,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": -0.24,
+        "argument2": {
+          "type": "minecraft:shifted_noise",
+          "noise": "nullscape_patch:island/large",
+          "xz_scale": 1,
+          "y_scale": 0,
+          "shift_x": "nullscape_patch:island/warp_x",
+          "shift_y": 0,
+          "shift_z": "nullscape_patch:island/warp_z"
+        }
+      }
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": 1.6,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": -0.36,
+        "argument2": {
+          "type": "minecraft:shifted_noise",
+          "noise": "nullscape_patch:island/small",
+          "xz_scale": 1,
+          "y_scale": 0,
+          "shift_x": "nullscape_patch:island/warp_x",
+          "shift_y": 0,
+          "shift_z": "nullscape_patch:island/warp_z"
+        }
+      }
+    }
+  }
+}

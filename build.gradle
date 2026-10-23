@@ -10,6 +10,15 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
+            }
+        }
+        filter { includeGroup 'maven.modrinth' }
+    }
     maven {
         name = 'AzureDoom Mods'
         url = 'https://maven.azuredoom.com/mods'
@@ -66,6 +75,9 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
+    // Nullscape 1.2.14 (mod build, NeoForge 1.21.1), loaded in dev runs. Modrinth version id 3fv8O3xX.
+    runtimeOnly "maven.modrinth:nullscape:3fv8O3xX"
+
     // Custom Portal API Reforged: not used by the Void portal. Uncomment (and set cpapi_version) if it's
     // adopted for data-driven Nether portals.
     // implementation "net.kyrptonaught.customportalapi:cpapireforged-neo-${minecraft_version}:${cpapi_version}"

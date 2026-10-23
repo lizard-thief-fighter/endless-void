@@ -22,6 +22,15 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
+# The Void's terrain uses Nullscape's biomes and density functions. Loading after Nullscape lets this mod's
+# data/nullscape overrides (the island patch) replace Nullscape's own files.
+[[dependencies.${mod_id}]]
+modId = "nullscape"
+type = "required"
+versionRange = "[1.2.14,)"
+ordering = "AFTER"
+side = "BOTH"
+
 # Custom Portal API is not used by the Void portal (it supports one frame block per portal and
 # can't express anchors or stored links). Re-enable if it's adopted for data-driven Nether portals.
 #[[dependencies.${mod_id}]]
