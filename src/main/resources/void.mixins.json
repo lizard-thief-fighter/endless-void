@@ -7,7 +7,8 @@
     "BaseFireBlockMixin",
     "PortalForcerMixin",
     "PortalShapeMixin",
-    "StrongholdPortalRoomMixin"
+    "StrongholdPortalRoomMixin",
+    "compat.PowerGridTransformerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

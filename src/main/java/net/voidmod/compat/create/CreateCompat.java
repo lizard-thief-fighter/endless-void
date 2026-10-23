@@ -24,6 +24,8 @@ import net.voidmod.transform.PortalTransformer;
  *   <li>Contraptions carried through portals by vanilla travel (e.g. minecart contraptions) convert their cargo.</li>
  *   <li>Train cargo converts once a carriage has fully crossed into another dimension
  *       ({@link CreateTrainTransformations}).</li>
+ *   <li>The track registration also lets Create: Power Grid's interdimensional transformers link through Void
+ *       portals (see {@code PowerGridTransformerMixin}).</li>
  * </ul>
  */
 public final class CreateCompat {
