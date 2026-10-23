@@ -3,6 +3,7 @@ package net.voidmod;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.voidmod.portal.PortalTypes;
 import net.voidmod.registry.VoidBlockEntities;
@@ -21,6 +22,8 @@ public class VoidMod {
         VoidRecipes.RECIPE_TYPES.register(modEventBus);
         VoidRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         modEventBus.addListener(PortalTypes::register);
+        // CreateCompat is only class-loaded when Create is present.
+        if (ModList.get().isLoaded("create")) net.voidmod.compat.create.CreateCompat.init(modEventBus);
     }
 
     public static ResourceLocation id(String path) {

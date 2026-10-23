@@ -23,6 +23,14 @@ repositories {
         name = 'AzureDoom Mods'
         url = 'https://maven.azuredoom.com/mods'
     }
+    maven {
+        name = 'Create' // Create, Ponder, Flywheel
+        url = 'https://maven.createmod.net'
+    }
+    maven {
+        name = 'Registrate'
+        url = 'https://mvn.devos.one/snapshots'
+    }
 }
 
 base {
@@ -77,6 +85,13 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     // Nullscape 1.2.14 (mod build, NeoForge 1.21.1), loaded in dev runs. Modrinth version id 3fv8O3xX.
     runtimeOnly "maven.modrinth:nullscape:3fv8O3xX"
+
+    // Create (optional at runtime; see net.voidmod.compat.create). Also loaded in dev runs for testing.
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    implementation "net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}"
+    compileOnly "dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}"
+    runtimeOnly "dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}"
+    implementation "com.tterrag.registrate:Registrate:${registrate_version}"
 
     // Custom Portal API Reforged: not used by the Void portal. Uncomment (and set cpapi_version) if it's
     // adopted for data-driven Nether portals.

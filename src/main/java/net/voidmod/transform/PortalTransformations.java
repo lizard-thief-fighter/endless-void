@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 /**
@@ -56,7 +57,23 @@ public final class PortalTransformations {
         if (processed.add(entity.getUUID())) transformEntity(entity, transformer);
     }
 
+    /** Handles one kind of entity inventory; returns true if it handled the entity. */
+    @FunctionalInterface
+    public interface EntityHandler {
+        boolean transform(Entity entity, PortalTransformer transformer);
+    }
+
+    private static final List<EntityHandler> HANDLERS = new CopyOnWriteArrayList<>();
+
+    /** Lets integrations (e.g. Create contraptions) convert inventories this class doesn't know about. Checked first. */
+    public static void registerEntityHandler(EntityHandler handler) {
+        HANDLERS.add(handler);
+    }
+
     public static void transformEntity(Entity entity, PortalTransformer transformer) {
+        for (EntityHandler handler : HANDLERS) {
+            if (handler.transform(entity, transformer)) return;
+        }
         if (entity instanceof ItemEntity item) {
             transformItemEntity(item, transformer);
         } else if (entity instanceof Player player) {

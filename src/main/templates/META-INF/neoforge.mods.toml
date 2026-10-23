@@ -31,6 +31,14 @@ versionRange = "[1.2.14,)"
 ordering = "AFTER"
 side = "BOTH"
 
+# Optional: trains link through Void portals and contraption/train cargo converts when crossing dimensions.
+[[dependencies.${mod_id}]]
+modId = "create"
+type = "optional"
+versionRange = "[6.0.10,)"
+ordering = "AFTER"
+side = "BOTH"
+
 # Custom Portal API is not used by the Void portal (it supports one frame block per portal and
 # can't express anchors or stored links). Re-enable if it's adopted for data-driven Nether portals.
 #[[dependencies.${mod_id}]]
