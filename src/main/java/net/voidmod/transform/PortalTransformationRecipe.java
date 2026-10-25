@@ -40,10 +40,6 @@ import java.util.Optional;
  *
  * A reversible recipe also turns {@code result} back into the ingredient's first item when travelling from
  * {@code to} to {@code from}, so reversible recipes should use a single-item ingredient.
- * <p>
- * Dimension-locking is a recipe with only {@code from}: the item changes on any trip out of that dimension.
- * When several recipes match, the most specific wins (both dimensions set, then one, then none), with the
- * recipe id breaking ties so the outcome never depends on load order.
  */
 public record PortalTransformationRecipe(Ingredient ingredient, Item result, Optional<ResourceKey<Level>> from,
                                          Optional<ResourceKey<Level>> to, boolean reversible)
@@ -72,11 +68,6 @@ public record PortalTransformationRecipe(Ingredient ingredient, Item result, Opt
             return DataResult.error(() -> "A reversible portal transformation needs both \"from\" and \"to\"");
         }
         return DataResult.success(recipe);
-    }
-
-    /** Number of dimensions this recipe pins down (0-2); higher wins when several recipes match. */
-    public int specificity() {
-        return (from.isPresent() ? 1 : 0) + (to.isPresent() ? 1 : 0);
     }
 
     /** The item this stack becomes when travelling {@code travelFrom -> travelTo}, or null if this recipe doesn't apply. */

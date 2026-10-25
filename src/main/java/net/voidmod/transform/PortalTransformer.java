@@ -12,7 +12,6 @@ import net.voidmod.registry.VoidRecipes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,10 +21,6 @@ import java.util.List;
 public final class PortalTransformer {
     /** Shulker boxes and other items with container contents are converted recursively, up to this depth. */
     private static final int MAX_DEPTH = 4;
-    /** Most specific recipe first; recipe id as a stable tiebreak. */
-    private static final Comparator<RecipeHolder<PortalTransformationRecipe>> PRECEDENCE =
-            Comparator.<RecipeHolder<PortalTransformationRecipe>>comparingInt(h -> -h.value().specificity())
-                    .thenComparing(RecipeHolder::id);
 
     private final List<RecipeHolder<PortalTransformationRecipe>> recipes;
     private final ResourceKey<Level> from;
@@ -42,10 +37,7 @@ public final class PortalTransformer {
         if (from.equals(to)) return null;
         List<RecipeHolder<PortalTransformationRecipe>> recipes =
                 level.getRecipeManager().getAllRecipesFor(VoidRecipes.PORTAL_TRANSFORMATION.get());
-        if (recipes.isEmpty()) return null;
-        List<RecipeHolder<PortalTransformationRecipe>> ordered = new ArrayList<>(recipes);
-        ordered.sort(PRECEDENCE);
-        return new PortalTransformer(ordered, from, to);
+        return recipes.isEmpty() ? null : new PortalTransformer(recipes, from, to);
     }
 
     /**
