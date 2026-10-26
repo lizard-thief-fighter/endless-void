@@ -8,6 +8,7 @@
     "PortalForcerMixin",
     "PortalShapeMixin",
     "StrongholdPortalRoomMixin",
+    "compat.PowerGridTransformerLinkMixin",
     "compat.PowerGridTransformerMixin"
   ],
   "injectors": {
