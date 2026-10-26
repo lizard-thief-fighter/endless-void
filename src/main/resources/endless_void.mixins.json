@@ -9,7 +9,10 @@
     "PortalShapeMixin",
     "StrongholdPortalRoomMixin",
     "compat.PowerGridTransformerLinkMixin",
-    "compat.PowerGridTransformerMixin"
+    "compat.PowerGridTransformerMixin",
+    "compat.QuarkChorusVegetationMixin",
+    "compat.QuarkEndFeatureDefaultsMixin",
+    "compat.ZetaDimensionConfigMixin"
   ],
   "injectors": {
     "defaultRequire": 1
