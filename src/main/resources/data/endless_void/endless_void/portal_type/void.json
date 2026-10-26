@@ -1,0 +1,9 @@
+{
+  "frame": "#endless_void:void_portal_frame",
+  "anchor": "#endless_void:void_portal_anchor",
+  "replaceable": "#endless_void:void_portal_replaceable",
+  "min_width": 2,
+  "max_width": 21,
+  "min_height": 3,
+  "max_height": 21
+}

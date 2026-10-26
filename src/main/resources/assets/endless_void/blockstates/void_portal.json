@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "axis=x": { "model": "endless_void:block/void_portal" },
+    "axis=z": { "model": "endless_void:block/void_portal" }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "frame": "#void:nether_portal_frame",
-  "generated_frame": "minecraft:obsidian",
-  "min_width": 2,
-  "max_width": 21,
-  "min_height": 3,
-  "max_height": 21
-}

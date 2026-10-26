@@ -86,7 +86,7 @@ dependencies {
     // Nullscape 1.2.14 (mod build, NeoForge 1.21.1), loaded in dev runs. Modrinth version id 3fv8O3xX.
     runtimeOnly "maven.modrinth:nullscape:3fv8O3xX"
 
-    // Create is an optional dependency (see net.voidmod.compat.create): compiled against, never bundled or
+    // Create is an optional dependency (see net.endlessvoid.compat.create): compiled against, never bundled or
     // required. Dev runs load it only with -Pcreate_in_dev=true (or create_in_dev=true in gradle.properties).
     def create = "com.simibubi.create:create-${minecraft_version}:${create_version}:slim"
     def ponder = "net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}"

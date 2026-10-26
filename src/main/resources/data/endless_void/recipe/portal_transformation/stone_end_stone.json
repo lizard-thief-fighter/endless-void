@@ -1,0 +1,10 @@
+{
+  "type": "endless_void:portal_transformation",
+  "ingredient": {
+    "item": "minecraft:stone"
+  },
+  "result": "minecraft:end_stone",
+  "from": "minecraft:overworld",
+  "to": "endless_void:the_void",
+  "reversible": true
+}

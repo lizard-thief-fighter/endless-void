@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.endlessvoid.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BaseFireBlockMixin",
+    "PortalForcerMixin",
+    "PortalShapeMixin",
+    "StrongholdPortalRoomMixin",
+    "compat.PowerGridTransformerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
